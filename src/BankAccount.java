@@ -1,14 +1,22 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
+@SuppressWarnings("unused")
 public class BankAccount {
+    private int accountNumber; // Add account number field
     private double balance;
     private String pin;
-    private ArrayList<String> transactionLogs;
+    private ArrayList<Transaction> transactionLogs;
 
-    public BankAccount(double initialBalance, String pin) {
+    public BankAccount(int accountNumber, double initialBalance, String pin) {
+        this.accountNumber = accountNumber; // Initialize account number
         this.balance = initialBalance;
         this.pin = pin;
         this.transactionLogs = new ArrayList<>();
+    }
+
+    public int getAccountNumber() {
+        return accountNumber; // Implement getAccountNumber method
     }
 
     public boolean validatePin(String enteredPin) {
@@ -18,7 +26,7 @@ public class BankAccount {
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
-            transactionLogs.add("Deposited: $" + amount);
+            transactionLogs.add(new Transaction("Deposit", amount));
             System.out.println("Successfully deposited: $" + amount);
         } else {
             System.out.println("Invalid deposit amount.");
@@ -28,9 +36,8 @@ public class BankAccount {
     public void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
             balance -= amount;
-            transactionLogs.add("Withdrew: $" + amount);
+            transactionLogs.add(new Transaction("Withdrawal", amount));
             System.out.println("Successfully withdrew: $" + amount);
-            System.out.println("Please take your cash.");
         } else if (amount > balance) {
             System.out.println("Insufficient funds.");
         } else {
@@ -38,26 +45,35 @@ public class BankAccount {
         }
     }
 
+    public void transfer(BankAccount recipient, double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            recipient.deposit(amount);
+            transactionLogs.add(new Transaction("Transfer to " + recipient.getAccountNumber(), amount));
+            System.out.println("Successfully transferred: $" + amount);
+        } else if (amount > balance) {
+            System.out.println("Insufficient funds.");
+        } else {
+            System.out.println("Invalid transfer amount.");
+        }
+    }
+
     public double getBalance() {
         return balance;
     }
 
-    public void showTransactionLogs() {
+    public ArrayList<Transaction> getTransactionLogs() {
+        return transactionLogs;
+    }
+
+    public void printTransactionHistory() {
         System.out.println("\nTransaction History:");
         if (transactionLogs.isEmpty()) {
             System.out.println("No transactions yet.");
         } else {
-            for (String log : transactionLogs) {
+            for (Transaction log : transactionLogs) {
                 System.out.println(log);
             }
         }
-    }
-
-    public void printSlip(String transactionType, double amount) {
-        System.out.println("\n--- Transaction Slip ---");
-        System.out.println("Transaction: " + transactionType);
-        System.out.println("Amount: $" + amount);
-        System.out.println("Current Balance: $" + getBalance());
-        System.out.println("------------------------");
     }
 }
