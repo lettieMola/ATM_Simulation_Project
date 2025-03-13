@@ -12,8 +12,8 @@ public class ATM {
         this.currentUser = null;
 
         // Initialize some users
-        users.put(546, new User(101, "1234", 1000.00));
-        users.put(321, new User(102, "5678", 1500.00));
+        users.put(546, new User(546, "1234", 1000.00));
+        users.put(321, new User(321, "5678", 1500.00));
     }
 
     public void authenticateUser() {
