@@ -1,7 +1,7 @@
 # ATM_Simulation_Project
 
 
-This is a Java-based **ATM Simulation Project** that mimics the functionality of an Automated Teller Machine (ATM). It allows users to register, log in, perform transactions (deposit, withdraw, transfer), view transaction history, and more. The project is user-friendly, and easy to extend.
+This is a Java-based **ATM Simulation Project** that mimics the functionality of an Automated Teller Machine (ATM). It allows users to register, log in, perform transactions (deposit, withdraw, transfer), view transaction history, and more. The project is user-friendly and easy to extend.
 
 ---
 
@@ -15,7 +15,7 @@ This is a Java-based **ATM Simulation Project** that mimics the functionality of
 - **Admin Features**:
   - View all users and their details.
   - View total bank balance.
-  - Identify the user with the most transactions.
+  - Identify the user who makes the most transactions.
   - Identify the user with the highest balance.
   - View transactions between two given dates.
   - Find the date with the most transactions.
